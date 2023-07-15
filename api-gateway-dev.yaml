@@ -7,14 +7,14 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: restaurant_route
+        - id: booking_route
           uri: lb://booking-microservice
           predicates:
           - Path=/api/book/**
           filters:
           - RewritePath=/api/book(?<segment>), /booking$\{segment}
 
-        - id: job_route
+        - id: restaurant_route
           uri: lb://restaurant-microservice
           predicates:
           - Path=/api/restaurant/**
