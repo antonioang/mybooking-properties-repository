@@ -12,14 +12,14 @@ spring:
           predicates:
           - Path=/api/book/**
           filters:
-          - RewritePath=/api/book(?<segment>), /bookings$\{segment}
+          - RewritePath=/api/book(?<segment>), /booking$\{segment}
 
         - id: job_route
           uri: lb://restaurant-microservice
           predicates:
           - Path=/api/restaurant/**
           filters:
-          - RewritePath=/api/restaurant(?<segment>/?), $\{segment}
+          - RewritePath=/api/restaurant(?<segment>/?), /restaurant$\{segment}
 
 management:
   endpoints:
