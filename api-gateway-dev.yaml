@@ -1,0 +1,39 @@
+# Port of the gateway
+server:
+  port: 9000
+
+# Gateway configuration
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: restaurant_route
+          uri: lb://booking-microservice
+          predicates:
+          - Path=/api/book/**
+          filters:
+          - RewritePath=/api/book(?<segment>), /bookings$\{segment}
+
+        - id: job_route
+          uri: lb://restaurant-microservice
+          predicates:
+          - Path=/api/restaurant/**
+          filters:
+          - RewritePath=/api/restaurant(?<segment>/?), $\{segment}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,refresh
+
+eureka:
+  client:
+    registerWithEureka: true
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER}
+      #defaultZone: http://localhost:8761/eureka/
+  instance:
+    lease-renewal-interval-in-seconds: 30
