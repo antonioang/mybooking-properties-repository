@@ -19,7 +19,7 @@ spring:
           predicates:
           - Path=/api/restaurant/**
           filters:
-          - RewritePath=/api/restaurant(?<segment>/?), /restaurant$\{segment}
+          - RewritePath=/api/restaurant(?<segment>/?), /restaurants$\{segment}
 
 management:
   endpoints:
