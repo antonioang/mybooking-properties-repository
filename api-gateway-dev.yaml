@@ -20,6 +20,13 @@ spring:
           - Path=/api/restaurant/**
           filters:
           - RewritePath=/api/restaurant(?<segment>/?), /restaurants$\{segment}
+        
+        - id: user_route
+          uri: lb://user-microservice
+          predicates:
+          - Path=/api/usr/**
+          filters:
+          - RewritePath=/api/usr(?<segment>), /user$\{segment}
 
 management:
   endpoints:
