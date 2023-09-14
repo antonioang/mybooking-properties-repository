@@ -6,8 +6,6 @@ server:
 spring:
   cloud:
     gateway:
-      httpclient:
-          rewrite-request-body: true
       routes:
         - id: booking_route
           uri: lb://booking-microservice
